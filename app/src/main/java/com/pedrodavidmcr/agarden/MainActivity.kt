@@ -3,7 +3,10 @@ package com.pedrodavidmcr.agarden
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
+import com.pedrodavidmcr.agarden.plants.data.RemotePlantsRepository
+import com.pedrodavidmcr.agarden.plants.view.PlantsFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
   private val plantsFragment: PlantsFragment = PlantsFragment()
@@ -13,6 +16,9 @@ class MainActivity : AppCompatActivity() {
         return@OnNavigationItemSelectedListener true
       }
       R.id.tab_plants -> {
+        thread {
+          RemotePlantsRepository().getPlants()
+        }
         return@OnNavigationItemSelectedListener true
       }
     }
