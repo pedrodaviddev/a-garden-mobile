@@ -16,9 +16,6 @@ class MainActivity : AppCompatActivity() {
         return@OnNavigationItemSelectedListener true
       }
       R.id.tab_plants -> {
-        thread {
-          RemotePlantsRepository().getPlants()
-        }
         return@OnNavigationItemSelectedListener true
       }
     }
@@ -31,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     setFragment()
+    refresh.setOnRefreshListener { plantsFragment.load() }
   }
 
   private fun setFragment() =

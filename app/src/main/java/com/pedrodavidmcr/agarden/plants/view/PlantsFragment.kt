@@ -6,10 +6,23 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.pedrodavidmcr.agarden.MainActivity
 import com.pedrodavidmcr.agarden.R
+import com.pedrodavidmcr.agarden.plants.domain.Plant
+import com.pedrodavidmcr.agarden.plants.presenter.PlantsPresenter
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_plants.*
 
-class PlantsFragment : Fragment() {
+class PlantsFragment : Fragment(), ListView<Plant> {
+  val presenter: PlantsPresenter by lazy { PlantsPresenter(this) }
+  override fun onListLoaded(list: List<Plant>) {
+    plantsRecView.adapter = PlantsAdapter().also {
+      it.list = list
+    }
+    plantsRecView.layoutManager = LinearLayoutManager(context)
+    (activity as MainActivity).refresh.isRefreshing = false
+  }
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                             savedInstanceState: Bundle?): View? =
       inflater.inflate(R.layout.fragment_plants, container, false)
@@ -17,7 +30,10 @@ class PlantsFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    plantsRecView.adapter = PlantsAdapter()
-    plantsRecView.layoutManager = LinearLayoutManager(context)
+    load()
+  }
+
+  fun load() {
+    presenter.getPlants()
   }
 }
