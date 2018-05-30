@@ -8,9 +8,9 @@
 
 
             <gradient
-                android:centerColor="#999999"
-                android:endColor="#999999"
-                android:startColor="#999999"
+                android:centerColor="#ffffff"
+                android:endColor="#ffffff"
+                android:startColor="#ffffff"
                 android:type="sweep" />
         </shape>
     </item>
