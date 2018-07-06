@@ -3,7 +3,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".plants.view.ByHourFragment">
+             tools:context=".plants.view.fragment.ByHourFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

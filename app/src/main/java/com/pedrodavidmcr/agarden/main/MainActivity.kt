@@ -1,14 +1,13 @@
-package com.pedrodavidmcr.agarden
+package com.pedrodavidmcr.agarden.main
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import com.pedrodavidmcr.agarden.R
 import com.pedrodavidmcr.agarden.home.view.HomeFragment
-import com.pedrodavidmcr.agarden.plants.data.RemotePlantsRepository
-import com.pedrodavidmcr.agarden.plants.view.PlantsFragment
+import com.pedrodavidmcr.agarden.plants.view.fragment.PlantsFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
   private val plantsFragment: PlantsFragment = PlantsFragment()

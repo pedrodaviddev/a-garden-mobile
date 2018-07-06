@@ -1,4 +1,4 @@
-package com.pedrodavidmcr.agarden.plants.view
+package com.pedrodavidmcr.agarden.plants.view.fragment
 
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
@@ -11,10 +11,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.pedrodavidmcr.agarden.MainActivity
+import com.pedrodavidmcr.agarden.main.MainActivity
 import com.pedrodavidmcr.agarden.R
+import com.pedrodavidmcr.agarden.base.view.ListView
 import com.pedrodavidmcr.agarden.plants.domain.Plant
 import com.pedrodavidmcr.agarden.plants.presenter.PlantsPresenter
+import com.pedrodavidmcr.agarden.plants.view.adapter.PlantsAdapter
+import com.pedrodavidmcr.agarden.plants.view.activity.PlantsDetailsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_plants.*
 import org.jetbrains.anko.support.v4.intentFor

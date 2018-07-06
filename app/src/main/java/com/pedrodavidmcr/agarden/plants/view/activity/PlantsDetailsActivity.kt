@@ -1,4 +1,4 @@
-package com.pedrodavidmcr.agarden.plants.view
+package com.pedrodavidmcr.agarden.plants.view.activity
 
 import android.os.Bundle
 import android.support.v4.view.ViewCompat
@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.animation.Animation
 import android.widget.TextView
 import com.pedrodavidmcr.agarden.R
+import com.pedrodavidmcr.agarden.plants.view.animation.ProgressAnimation
+import com.pedrodavidmcr.agarden.plants.view.adapter.SettingsAdapter
 import kotlinx.android.synthetic.main.activity_plants_details.*
 import org.jetbrains.anko.childrenSequence
 import org.jetbrains.anko.dip

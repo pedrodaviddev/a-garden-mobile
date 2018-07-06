@@ -1,6 +1,6 @@
-package com.pedrodavidmcr.agarden.executor
+package com.pedrodavidmcr.agarden.base.executor
 
-import com.pedrodavidmcr.agarden.UseCase
+import com.pedrodavidmcr.agarden.base.domain.usecase.UseCase
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 

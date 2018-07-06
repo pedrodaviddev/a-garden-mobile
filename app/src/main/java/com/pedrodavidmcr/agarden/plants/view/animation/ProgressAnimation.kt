@@ -1,4 +1,4 @@
-package com.pedrodavidmcr.agarden.plants.view
+package com.pedrodavidmcr.agarden.plants.view.animation
 
 import android.view.animation.Animation
 import android.view.animation.Transformation

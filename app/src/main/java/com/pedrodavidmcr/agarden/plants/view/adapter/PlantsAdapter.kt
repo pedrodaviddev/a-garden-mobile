@@ -1,4 +1,4 @@
-package com.pedrodavidmcr.agarden.plants.view
+package com.pedrodavidmcr.agarden.plants.view.adapter
 
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.CardView

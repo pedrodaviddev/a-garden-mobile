@@ -1,4 +1,4 @@
-package com.pedrodavidmcr.agarden.plants.view
+package com.pedrodavidmcr.agarden.plants.view.fragment
 
 
 import android.os.Bundle
