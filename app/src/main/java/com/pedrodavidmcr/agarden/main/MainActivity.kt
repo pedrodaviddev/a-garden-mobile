@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     setFragment(homeFragment)
-    refresh.setOnRefreshListener { plantsFragment.load() }
   }
 
   private fun setFragment(fragment: Fragment) =

@@ -7,23 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".main.MainActivity">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/refresh"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
     <android.support.design.widget.FloatingActionButton

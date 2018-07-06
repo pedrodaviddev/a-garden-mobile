@@ -46,7 +46,6 @@ class PlantsFragment : Fragment(), ListView<Plant> {
       it.list = list
     }
     plantsRecView.layoutManager = LinearLayoutManager(context)
-    (activity as MainActivity).refresh.isRefreshing = false
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
