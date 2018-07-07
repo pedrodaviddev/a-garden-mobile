@@ -8,11 +8,14 @@ import android.view.LayoutInflater
 import android.view.animation.Animation
 import android.widget.TextView
 import com.pedrodavidmcr.agarden.R
+import com.pedrodavidmcr.agarden.irrigation.view.activity.PlantConfigurationActivity
 import com.pedrodavidmcr.agarden.plants.view.animation.ProgressAnimation
 import com.pedrodavidmcr.agarden.plants.view.adapter.SettingsAdapter
 import kotlinx.android.synthetic.main.activity_plants_details.*
 import org.jetbrains.anko.childrenSequence
 import org.jetbrains.anko.dip
+import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.textAppearance
 
 class PlantsDetailsActivity : AppCompatActivity() {
@@ -36,45 +39,11 @@ class PlantsDetailsActivity : AppCompatActivity() {
     })
     ViewCompat.setTransitionName(maincard, intent.extras.getString("transitionRoot"))
     ViewCompat.setTransitionName(image, intent.extras.getString("transitionImage"))
-    configuration.adapter = SettingsAdapter(supportFragmentManager)
-    tabLayout.setupWithViewPager(configuration)
-    tabLayout.getTabAt(0)!!.customView = LayoutInflater.from(this)
-        .inflate(R.layout.tab_settings, null).childrenSequence().filter { it is TextView }
-        .first().apply {
-          (this as TextView).apply {
-            text = "Hour"
-            textAppearance = android.R.style.TextAppearance_Material_Widget_TabWidget
-            textSize = 11F
-            compoundDrawablePadding = dip(5)
-
-            setCompoundDrawablesWithIntrinsicBounds(R.drawable.clock, 0, 0, 0)
-          }
-        }
-    tabLayout.getTabAt(1)!!.customView = LayoutInflater.from(this)
-        .inflate(R.layout.tab_settings, null).childrenSequence().filter { it is TextView }
-        .first().apply {
-          (this as TextView).apply {
-            text = "Light"
-            textAppearance = android.R.style.TextAppearance_Material_Widget_TabWidget
-            textSize = 11F
-            compoundDrawablePadding = dip(5)
-            setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.sun, 0, 0, 0)
-          }
-        }
-    tabLayout.getTabAt(2)!!.customView = LayoutInflater.from(this)
-        .inflate(R.layout.tab_settings, null).childrenSequence().filter { it is TextView }
-        .first().apply {
-          (this as TextView).apply {
-            text = "Humidity"
-            textAppearance = android.R.style.TextAppearance_Material_Widget_TabWidget
-            textSize = 11F
-            compoundDrawablePadding = dip(5)
-            setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.humidity, 0, 0, 0)
-          }
-        }
     supportStartPostponedEnterTransition()
 
-
+    image.onClick {
+     startActivity<PlantConfigurationActivity>()
+    }
   }
 
   override fun onBackPressed() {

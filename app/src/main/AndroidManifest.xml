@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".plants.view.activity.PlantsDetailsActivity">
         </activity>
+        <activity android:name=".irrigation.view.activity.PlantConfigurationActivity">
+        </activity>
     </application>
 
 </manifest>
