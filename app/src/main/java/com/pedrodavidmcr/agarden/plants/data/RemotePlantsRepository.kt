@@ -12,5 +12,4 @@ class RemotePlantsRepository : PlantsRepository {
           .responseObject<List<Plant>>().third
           .fold(success = { return it },
               failure = { throw Exception() })
-
 }

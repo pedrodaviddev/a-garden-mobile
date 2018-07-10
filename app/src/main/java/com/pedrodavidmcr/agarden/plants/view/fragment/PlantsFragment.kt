@@ -11,14 +11,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.pedrodavidmcr.agarden.main.MainActivity
 import com.pedrodavidmcr.agarden.R
 import com.pedrodavidmcr.agarden.base.view.ListView
 import com.pedrodavidmcr.agarden.plants.domain.Plant
 import com.pedrodavidmcr.agarden.plants.presenter.PlantsPresenter
-import com.pedrodavidmcr.agarden.plants.view.adapter.PlantsAdapter
 import com.pedrodavidmcr.agarden.plants.view.activity.PlantsDetailsActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.pedrodavidmcr.agarden.plants.view.adapter.PlantsAdapter
+import com.pedrodavidmcr.agarden.plants.view.toBundle
 import kotlinx.android.synthetic.main.fragment_plants.*
 import org.jetbrains.anko.support.v4.intentFor
 
@@ -33,11 +32,12 @@ class PlantsFragment : Fragment(), ListView<Plant> {
           activity!!, *array)
           .toBundle()!!
 
-
-      startActivity(intentFor<PlantsDetailsActivity>(
+      val intent = intentFor<PlantsDetailsActivity>(
           "transitionRoot" to ViewCompat.getTransitionName(card),
           "transitionImage" to ViewCompat.getTransitionName(image)
-      ), bundle)
+      )
+      intent.putExtras(plant.toBundle())
+      startActivity(intent, bundle)
     }
   }
 
