@@ -8,7 +8,7 @@ import com.pedrodavidmcr.agarden.plants.domain.repository.PlantsRepository
 
 class RemotePlantsRepository : PlantsRepository {
   override fun getAllPlants(): List<Plant> =
-      "${URL}/plants".httpGet()
+      "$URL/plants".httpGet()
           .responseObject<List<Plant>>().third
           .fold(success = { return it },
               failure = { throw Exception() })
