@@ -1,7 +1,7 @@
 package com.pedrodavidmcr.agarden.irrigation.view.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.widget.TextView
 import com.pedrodavidmcr.agarden.R
@@ -9,6 +9,7 @@ import com.pedrodavidmcr.agarden.plants.view.adapter.SettingsAdapter
 import kotlinx.android.synthetic.main.activity_plant_configuration.*
 import org.jetbrains.anko.childrenSequence
 import org.jetbrains.anko.dip
+import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.textAppearance
 
 class PlantConfigurationActivity : AppCompatActivity() {
@@ -18,6 +19,9 @@ class PlantConfigurationActivity : AppCompatActivity() {
     setContentView(R.layout.activity_plant_configuration)
 
     setUpIrrigationParameters()
+    updateButton.onClick {
+
+    }
   }
 
   private fun setUpIrrigationParameters() {
@@ -27,7 +31,7 @@ class PlantConfigurationActivity : AppCompatActivity() {
         .inflate(R.layout.tab_settings, null).childrenSequence().filter { it is TextView }
         .first().apply {
           (this as TextView).apply {
-            text = "At some hour"
+            text = "Scheduled"
             textAppearance = android.R.style.TextAppearance_Material_Widget_TabWidget
             textSize = 11F
             compoundDrawablePadding = dip(5)
