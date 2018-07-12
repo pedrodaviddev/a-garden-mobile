@@ -16,7 +16,7 @@ class PlantsPresenter(private val view: ListView<Plant>) : ListOutput<Plant> {
   }
 
   override fun onError() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
   }
 
   fun getPlants() = Executor.execute(GetAllPlants(RemotePlantsRepository(), this))

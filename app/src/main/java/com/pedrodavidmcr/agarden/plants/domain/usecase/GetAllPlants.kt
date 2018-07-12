@@ -13,7 +13,7 @@ class GetAllPlants(private val repository: PlantsRepository,
       val list = repository.getAllPlants()
       return { output.onLoadList(list) }
     } catch (e: Exception) {
-      return { output.onError() }
+      return { throw e }
     }
   }
 }

@@ -19,9 +19,10 @@ import com.pedrodavidmcr.agarden.plants.domain.Sample
 import com.pedrodavidmcr.agarden.plants.presenter.PlantDetailPresenter
 import com.pedrodavidmcr.agarden.plants.view.animation.ProgressAnimation
 import com.pedrodavidmcr.agarden.plants.view.getSharedPlant
+import com.pedrodavidmcr.agarden.plants.view.toBundle
 import kotlinx.android.synthetic.main.activity_plants_details.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.startActivity
 
 class PlantsDetailsActivity : AppCompatActivity(), DataView<Sample> {
   private val presenter: PlantDetailPresenter by lazy { PlantDetailPresenter(this) }
@@ -32,7 +33,9 @@ class PlantsDetailsActivity : AppCompatActivity(), DataView<Sample> {
     setContentView(R.layout.activity_plants_details)
     animateActivityEntry()
     image.onClick {
-      startActivity<PlantConfigurationActivity>()
+      startActivity(
+          intentFor<PlantConfigurationActivity>().putExtras(plant.toBundle())
+      )
     }
     formatCharts(temperatureStat, humidityStat)
     presenter.getSamplesFrom(plant)

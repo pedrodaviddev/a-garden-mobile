@@ -16,4 +16,5 @@ class ByHumidityFragment : Fragment() {
       : View? = inflater.inflate(R.layout.fragment_by_humidity, container, false)
 
 
+
 }

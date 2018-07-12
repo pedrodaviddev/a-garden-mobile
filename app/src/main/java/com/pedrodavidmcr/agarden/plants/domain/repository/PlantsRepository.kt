@@ -4,4 +4,5 @@ import com.pedrodavidmcr.agarden.plants.domain.Plant
 
 interface PlantsRepository {
   fun getAllPlants(): List<Plant>
+  fun updatePlant(plant: Plant)
 }
