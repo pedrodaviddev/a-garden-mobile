@@ -92,7 +92,7 @@ class PlantsDetailsActivity : AppCompatActivity(), DataView<Sample> {
     supportPostponeEnterTransition()
     window.sharedElementEnterTransition.setOnlyEndAnimation {
       bar.startAnimation(ProgressAnimation(bar, 0F, 90F).apply { duration = 1000 })
-      bar2.startAnimation(ProgressAnimation(bar2, 0F, 100F).apply { duration = 500 })
+      bar2.startAnimation(ProgressAnimation(bar2, 0F, 67F).apply { duration = 500 })
       bar3.startAnimation(ProgressAnimation(bar3, 0F, 70F).apply { duration = 700 })
     }
     ViewCompat.setTransitionName(maincard, intent.extras.getString("transitionRoot"))
