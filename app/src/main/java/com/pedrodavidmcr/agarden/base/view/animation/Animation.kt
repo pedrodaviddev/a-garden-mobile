@@ -1,5 +1,6 @@
 package com.pedrodavidmcr.agarden.base.view.animation
 
+import android.animation.Animator
 import android.transition.Transition
 import android.view.animation.Animation
 
@@ -18,5 +19,14 @@ fun Animation.setOnlyEndAnimation(listener: () -> Unit) {
     override fun onAnimationEnd(animation: Animation?) = listener()
     override fun onAnimationRepeat(animation: Animation?) = Unit
     override fun onAnimationStart(animation: Animation?) = Unit
+  })
+}
+
+fun Animator.setOnlyEndAnimation(listener: () -> Unit) {
+  this.addListener(object : Animator.AnimatorListener {
+    override fun onAnimationEnd(animation: Animator?) = listener()
+    override fun onAnimationRepeat(animation: Animator?) = Unit
+    override fun onAnimationStart(animation: Animator?) = Unit
+    override fun onAnimationCancel(animation: Animator?) = Unit
   })
 }

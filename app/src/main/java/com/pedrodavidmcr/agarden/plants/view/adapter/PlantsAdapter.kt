@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import com.pedrodavidmcr.agarden.R
 import com.pedrodavidmcr.agarden.plants.domain.Plant
 import kotlinx.android.synthetic.main.items_plants.view.*
 
-class PlantsAdapter(var trigger: (CardView, ImageView, Plant) -> Unit) : RecyclerView.Adapter<PlantsAdapter.PlantsHolder>() {
+class PlantsAdapter(var trigger: (TextView, CardView, ImageView, Plant) -> Unit) : RecyclerView.Adapter<PlantsAdapter.PlantsHolder>() {
   var list = listOf<Plant>()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlantsHolder =
@@ -27,8 +28,9 @@ class PlantsAdapter(var trigger: (CardView, ImageView, Plant) -> Unit) : Recycle
     fun setData(plant: Plant) {
       ViewCompat.setTransitionName(item.rootCard, "${plant.name}Card")
       ViewCompat.setTransitionName(item.plantImage, "${plant.name}Image")
+      ViewCompat.setTransitionName(item.plantName, "${plant.name}Name")
       item.setOnClickListener {
-        trigger(item.rootCard, item.plantImage, plant)
+        trigger(item.plantName, item.rootCard, item.plantImage, plant)
       }
       with(item) {
         plantImage.setCircleBackgroundColorResource(android.R.color.holo_blue_light)

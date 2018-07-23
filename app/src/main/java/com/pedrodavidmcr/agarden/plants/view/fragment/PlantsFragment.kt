@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import com.pedrodavidmcr.agarden.R
 import com.pedrodavidmcr.agarden.base.view.ListView
 import com.pedrodavidmcr.agarden.plants.domain.Plant
@@ -19,22 +20,25 @@ import com.pedrodavidmcr.agarden.plants.view.activity.PlantsDetailsActivity
 import com.pedrodavidmcr.agarden.plants.view.adapter.PlantsAdapter
 import com.pedrodavidmcr.agarden.plants.view.toBundle
 import kotlinx.android.synthetic.main.fragment_plants.*
+import kotlinx.android.synthetic.main.items_plants.*
 import org.jetbrains.anko.support.v4.intentFor
 
 class PlantsFragment : Fragment(), ListView<Plant> {
-  val presenter: PlantsPresenter by lazy { PlantsPresenter(this) }
-  val trigger: (CardView, ImageView, Plant) -> Unit by lazy {
-    { card: CardView, image: ImageView, plant: Plant ->
+  private val presenter: PlantsPresenter by lazy { PlantsPresenter(this) }
+  private val trigger: (TextView, CardView, ImageView, Plant) -> Unit by lazy {
+    { text: TextView, card: CardView, image: ImageView, plant: Plant ->
       val array = arrayOf<Pair<View, String>>(
           Pair.create(card, ViewCompat.getTransitionName(card)),
-          Pair.create(image, ViewCompat.getTransitionName(image)))
+          Pair.create(image, ViewCompat.getTransitionName(image)),
+          Pair.create(text, ViewCompat.getTransitionName(text)))
       val bundle: Bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
           activity!!, *array)
           .toBundle()!!
 
       val intent = intentFor<PlantsDetailsActivity>(
           "transitionRoot" to ViewCompat.getTransitionName(card),
-          "transitionImage" to ViewCompat.getTransitionName(image)
+          "transitionImage" to ViewCompat.getTransitionName(image),
+          "transitionName" to ViewCompat.getTransitionName(plantName)
       )
       intent.putExtras(plant.toBundle())
       startActivity(intent, bundle)
