@@ -10,11 +10,21 @@ import com.pedrodavidmcr.agarden.plants.domain.Plant
 import com.pedrodavidmcr.agarden.plants.domain.repository.PlantsRepository
 
 class RemotePlantsRepository : PlantsRepository {
+  override fun getPlant(plantId: Int): Plant =
+      "$URL/plant/$plantId".httpGet()
+          .responseObject<Plant>().third
+          .fold(success = { return it },
+              failure = {
+                Log.d("error", it.message)
+                Log.d("error", it.localizedMessage)
+                throw Exception(it.message)
+              })
+
   override fun updatePlant(plant: Plant) {
     val json = Gson().toJson(plant)
     "$URL/plant/${plant.id}".httpPut()
         .body(json).also {
-         it.headers["Content-Type"] = "application/json"
+          it.headers["Content-Type"] = "application/json"
         }.responseObject<Any>().third.fold(
         success = {},
         failure = { throw Exception(it.message) }
@@ -25,5 +35,9 @@ class RemotePlantsRepository : PlantsRepository {
       "$URL/plants".httpGet()
           .responseObject<List<Plant>>().third
           .fold(success = { return it },
-              failure = { throw Exception(it.message) })
+              failure = {
+                Log.d("error", it.message)
+                Log.d("error", it.localizedMessage)
+                throw Exception(it.message)
+              })
 }

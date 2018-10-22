@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.pedrodavidmcr.agarden.base.view.PresetRadioGroup
+    <com.pedrodavidmcr.agarden.base.view.custom.PresetRadioGroup
         android:id="@+id/humiditySelector"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:presetRadioCheckedId="@+id/lowHumidity">
 
-        <com.pedrodavidmcr.agarden.base.view.PresetValueButton
+        <com.pedrodavidmcr.agarden.base.view.custom.PresetValueButton
             android:id="@+id/lowHumidity"
             style="@style/PresetLayoutButton"
             android:layout_width="0dp"
@@ -65,7 +65,7 @@
             app:presetButtonUnitText="Humidity"
             app:presetButtonValueText="LOW"/>
 
-        <com.pedrodavidmcr.agarden.base.view.PresetValueButton
+        <com.pedrodavidmcr.agarden.base.view.custom.PresetValueButton
             android:id="@+id/mediumHumidity"
             style="@style/PresetLayoutButton"
             android:layout_width="0dp"
@@ -74,7 +74,7 @@
             app:presetButtonUnitText="Humidity"
             app:presetButtonValueText="MEDIUM"/>
 
-        <com.pedrodavidmcr.agarden.base.view.PresetValueButton
+        <com.pedrodavidmcr.agarden.base.view.custom.PresetValueButton
             android:id="@+id/highHumidity"
             style="@style/PresetLayoutButton"
             android:layout_width="0dp"
@@ -83,7 +83,7 @@
             app:presetButtonUnitText="Humidity"
             app:presetButtonValueText="HIGH"/>
 
-        <com.pedrodavidmcr.agarden.base.view.PresetValueButton
+        <com.pedrodavidmcr.agarden.base.view.custom.PresetValueButton
             android:id="@+id/maxHumidity"
             style="@style/PresetLayoutButton"
             android:layout_width="0dp"
@@ -92,9 +92,9 @@
             app:presetButtonUnitText="Humidity"
             app:presetButtonValueText="VERY HIGH"/>
 
-    </com.pedrodavidmcr.agarden.base.view.PresetRadioGroup>
+    </com.pedrodavidmcr.agarden.base.view.custom.PresetRadioGroup>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -108,11 +108,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.design.widget.TabLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
@@ -124,7 +124,7 @@
                 app:tabGravity="fill"
                 app:tabMode="fixed"/>
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/configuration"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -135,8 +135,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/tabLayout"
                 app:tabGravity="center"/>
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/updateButton"
@@ -150,4 +150,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

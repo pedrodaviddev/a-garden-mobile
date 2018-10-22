@@ -1,8 +1,8 @@
 package com.pedrodavidmcr.agarden.plants
 
 object Humidity {
-  val LOW = 0
-  val MEDIUM = 1
-  val HIGH = 2
-  val VERY_HIGH = 3
+  const val LOW = 0
+  const val MEDIUM = 1
+  const val HIGH = 2
+  const val VERY_HIGH = 3
 }

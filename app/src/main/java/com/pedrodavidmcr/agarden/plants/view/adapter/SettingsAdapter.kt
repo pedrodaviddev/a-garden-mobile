@@ -1,16 +1,16 @@
 package com.pedrodavidmcr.agarden.plants.view.adapter
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.pedrodavidmcr.agarden.plants.domain.Configuration.BY_HUMIDITY
 import com.pedrodavidmcr.agarden.plants.view.fragment.ByHourFragment
 import com.pedrodavidmcr.agarden.plants.view.fragment.ByHumidityFragment
 
-class SettingsAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
+class SettingsAdapter(manager: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentStatePagerAdapter(manager) {
   val byHour = ByHourFragment()
   val byHumidity = ByHumidityFragment()
-  override fun getItem(position: Int): Fragment = when (position) {
+  override fun getItem(position: Int): androidx.fragment.app.Fragment = when (position) {
     0 -> byHour
     else -> byHumidity
   }

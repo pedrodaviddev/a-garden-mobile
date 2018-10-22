@@ -1,4 +1,4 @@
-package com.pedrodavidmcr.agarden.base.view
+package com.pedrodavidmcr.agarden.base.view.custom
 
 import android.view.View
 import android.widget.Checkable

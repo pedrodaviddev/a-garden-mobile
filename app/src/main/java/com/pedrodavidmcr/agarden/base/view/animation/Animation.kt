@@ -4,7 +4,7 @@ import android.animation.Animator
 import android.transition.Transition
 import android.view.animation.Animation
 
-fun Transition.setOnlyEndAnimation(listener: () -> Unit) {
+fun Transition.onFinish(listener: () -> Unit) {
   this.addListener(object : Transition.TransitionListener {
     override fun onTransitionEnd(transition: Transition?) = listener()
     override fun onTransitionResume(transition: Transition?) = Unit
@@ -14,7 +14,7 @@ fun Transition.setOnlyEndAnimation(listener: () -> Unit) {
   })
 }
 
-fun Animation.setOnlyEndAnimation(listener: () -> Unit) {
+fun Animation.onFinish(listener: () -> Unit) {
   this.setAnimationListener(object : Animation.AnimationListener {
     override fun onAnimationEnd(animation: Animation?) = listener()
     override fun onAnimationRepeat(animation: Animation?) = Unit
@@ -22,7 +22,7 @@ fun Animation.setOnlyEndAnimation(listener: () -> Unit) {
   })
 }
 
-fun Animator.setOnlyEndAnimation(listener: () -> Unit) {
+fun Animator.onFinish(listener: () -> Unit) {
   this.addListener(object : Animator.AnimatorListener {
     override fun onAnimationEnd(animation: Animator?) = listener()
     override fun onAnimationRepeat(animation: Animator?) = Unit

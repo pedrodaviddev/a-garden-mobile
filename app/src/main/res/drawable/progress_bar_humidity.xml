@@ -7,11 +7,8 @@
             android:useLevel="true">
 
 
-            <gradient
-                android:centerColor="#999999"
-                android:endColor="#999999"
-                android:startColor="#999999"
-                android:type="sweep" />
+            <solid
+                android:color="#9e9e9e"/>
         </shape>
     </item>
 
@@ -36,9 +33,8 @@
                     android:toDegrees="360" />
 
                 <gradient
-                    android:centerColor="#304ffe"
-                    android:endColor="#3d5afe"
-                    android:startColor="#40c4ff"
+                    android:startColor="#69d1ff"
+                    android:endColor="#304ffe"
                     android:type="sweep" />
 
             </shape>

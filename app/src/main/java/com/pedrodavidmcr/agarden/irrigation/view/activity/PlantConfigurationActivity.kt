@@ -1,16 +1,18 @@
 package com.pedrodavidmcr.agarden.irrigation.view.activity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.pedrodavidmcr.agarden.R
+import com.pedrodavidmcr.agarden.base.Injector
 import com.pedrodavidmcr.agarden.plants.Humidity
 import com.pedrodavidmcr.agarden.plants.domain.Configuration
 import com.pedrodavidmcr.agarden.plants.domain.Plant
-import com.pedrodavidmcr.agarden.plants.presenter.PlantConfigurationPresenter
 import com.pedrodavidmcr.agarden.plants.view.adapter.SettingsAdapter
-import com.pedrodavidmcr.agarden.plants.view.getSharedPlant
+import com.pedrodavidmcr.agarden.plants.viewmodel.PlantConfigurationViewModel
 import kotlinx.android.synthetic.main.activity_plant_configuration.*
 import org.jetbrains.anko.childrenSequence
 import org.jetbrains.anko.dip
@@ -18,44 +20,65 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.textAppearance
 
 class PlantConfigurationActivity : AppCompatActivity() {
-  val plant: Plant by lazy { intent.getSharedPlant() }
+  private lateinit var viewModel: PlantConfigurationViewModel
+  val plantId: Int by lazy { intent.getIntExtra("plantId", -1) }
   private val adapter: SettingsAdapter by lazy { SettingsAdapter(supportFragmentManager) }
-  private val presenter: PlantConfigurationPresenter by lazy { PlantConfigurationPresenter() }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_plant_configuration)
 
+    val factory = Injector.providePlantConfigurationViewModelFactory(plantId)
+    viewModel = ViewModelProviders.of(this, factory)
+        .get(PlantConfigurationViewModel::class.java)
+
     setUpIrrigationParameters()
     setCurrentConfiguration()
+    initButton()
+  }
+
+  private fun initButton() {
     updateButton.onClick {
-      presenter.updateConfigurationOf(getUpdatedPlantConfiguration())
+      selectNewPlantConfiguration()
+      viewModel.updatePlantConfiguration()
       finish()
     }
   }
 
-  private fun getUpdatedPlantConfiguration(): Plant = plant.copy(
-      requiredHumidity = when {
-        lowHumidity.isChecked -> Humidity.LOW
-        mediumHumidity.isChecked -> Humidity.MEDIUM
-        highHumidity.isChecked -> Humidity.HIGH
-        else -> Humidity.VERY_HIGH
-      },
-      configuration = adapter.getConfiguration(configuration.currentItem)
-  )
+  private fun selectNewPlantConfiguration() {
+    viewModel.plant.value = viewModel.plant.value!!.copy(
+        requiredHumidity = getSelectedHumidityRequirements(),
+        configuration = adapter.getConfiguration(configuration.currentItem)
+    )
+  }
+
 
   private fun setCurrentConfiguration() {
-    setCurrentHumidityRequirements()
-    configuration.currentItem = if(plant.configuration == Configuration.BY_HUMIDITY) 1 else {
+    viewModel.plant.observe(this, Observer { plant ->
+      setCurrentHumidityRequirements(plant)
+      setCurrentIrrigationMode(plant)
+    })
+  }
+
+  private fun setCurrentIrrigationMode(plant: Plant) {
+    configuration.currentItem = if (plant.configuration == Configuration.BY_HUMIDITY) 1 else {
       adapter.setConfiguration(plant.configuration)
       0
     }
   }
 
-  private fun setCurrentHumidityRequirements() {
-    lowHumidity.isChecked = plant.requiredHumidity == Humidity.LOW
-    mediumHumidity.isChecked = plant.requiredHumidity == Humidity.MEDIUM
-    highHumidity.isChecked = plant.requiredHumidity == Humidity.HIGH
-    maxHumidity.isChecked = plant.requiredHumidity == Humidity.VERY_HIGH
+  private fun setCurrentHumidityRequirements(plant: Plant) = plant.run {
+    lowHumidity.isChecked = requiredHumidity == Humidity.LOW
+    mediumHumidity.isChecked = requiredHumidity == Humidity.MEDIUM
+    highHumidity.isChecked = requiredHumidity == Humidity.HIGH
+    maxHumidity.isChecked = requiredHumidity == Humidity.VERY_HIGH
+  }
+
+  private fun getSelectedHumidityRequirements() = when {
+    lowHumidity.isChecked -> Humidity.LOW
+    mediumHumidity.isChecked -> Humidity.MEDIUM
+    highHumidity.isChecked -> Humidity.HIGH
+    else -> Humidity.VERY_HIGH
   }
 
   private fun setUpIrrigationParameters() {

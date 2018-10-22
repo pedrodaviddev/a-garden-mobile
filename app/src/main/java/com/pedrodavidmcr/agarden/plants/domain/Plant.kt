@@ -6,4 +6,5 @@ data class Plant(
     val requiredHumidity: Int,
     val configuration: Int,
     val temperature: Double,
-    val sunLight: Double)
+    val sunLight: Double,
+    val humidity: Double)

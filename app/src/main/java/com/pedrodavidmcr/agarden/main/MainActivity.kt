@@ -1,9 +1,9 @@
 package com.pedrodavidmcr.agarden.main
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.pedrodavidmcr.agarden.R
 import com.pedrodavidmcr.agarden.home.view.HomeFragment
 import com.pedrodavidmcr.agarden.plants.view.fragment.PlantsFragment
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     setFragment(homeFragment)
   }
 
-  private fun setFragment(fragment: Fragment) =
+  private fun setFragment(fragment: androidx.fragment.app.Fragment) =
       supportFragmentManager.beginTransaction()
           .replace(R.id.container, fragment)
           .commitAllowingStateLoss()

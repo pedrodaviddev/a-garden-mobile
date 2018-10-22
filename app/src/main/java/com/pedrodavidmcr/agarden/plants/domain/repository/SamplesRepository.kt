@@ -4,5 +4,5 @@ import com.pedrodavidmcr.agarden.plants.domain.Plant
 import com.pedrodavidmcr.agarden.plants.domain.Sample
 
 interface SamplesRepository {
-  fun getSamplesFrom(plant: Plant): List<Sample>
+  fun getSamplesFrom(plantId: Int): List<Sample>
 }

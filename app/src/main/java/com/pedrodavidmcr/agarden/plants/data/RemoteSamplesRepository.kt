@@ -8,8 +8,8 @@ import com.pedrodavidmcr.agarden.plants.domain.Sample
 import com.pedrodavidmcr.agarden.plants.domain.repository.SamplesRepository
 
 class RemoteSamplesRepository : SamplesRepository {
-  override fun getSamplesFrom(plant: Plant): List<Sample> {
-    "$URL/sample/${plant.id}".httpGet()
+  override fun getSamplesFrom(plantId: Int): List<Sample> {
+    "$URL/sample/$plantId".httpGet()
         .responseObject<List<Sample>>().third
         .fold(success = { return it },
             failure = { throw Exception() })

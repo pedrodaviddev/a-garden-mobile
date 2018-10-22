@@ -2,7 +2,7 @@ package com.pedrodavidmcr.agarden.plants.view.fragment
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import com.pedrodavidmcr.agarden.plants.domain.Configuration.BY_TIME_SUNSET
 import kotlinx.android.synthetic.main.fragment_by_hour.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
-class ByHourFragment : Fragment() {
+class ByHourFragment : androidx.fragment.app.Fragment() {
   var conf = 0
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                             savedInstanceState: Bundle?)

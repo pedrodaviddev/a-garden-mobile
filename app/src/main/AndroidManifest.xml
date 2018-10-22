@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".plants.view.activity.PlantsDetailsActivity">
+        <activity android:name=".plants.view.activity.PlantDetailActivity">
         </activity>
         <activity android:name=".irrigation.view.activity.PlantConfigurationActivity">
         </activity>
