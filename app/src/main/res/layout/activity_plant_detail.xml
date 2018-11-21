@@ -174,7 +174,7 @@
                         android:layout_height="220dp"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/flower"
+                        android:src="@drawable/hierbabuena"
                         android:visibility="visible"
                         app:civ_fill_color="@color/colorPrimary"/>
                 </RelativeLayout>

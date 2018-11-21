@@ -6,9 +6,9 @@ import android.animation.PropertyValuesHolder
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.view.View.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -48,7 +48,7 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
     initRefreshLayout()
     initCharts()
     image.onClick {
-      startActivity<PlantConfigurationActivity>( "plantId" to plantId)
+      startActivity<PlantConfigurationActivity>("plantId" to plantId)
     }
   }
 
@@ -63,13 +63,13 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
 
 
   private fun restoreStateOfViewsIfActivityRecreation(savedInstanceState: Bundle?) =
-      savedInstanceState?.let {
-        image.layoutParams.height = image.layoutParams.height / 2
-        image.layoutParams.width = image.layoutParams.width / 2
-        lightBar.setVisible()
-        humidityBar.setVisible()
-        temperatureBar.setVisible()
-      }
+    savedInstanceState?.let {
+      image.layoutParams.height = image.layoutParams.height / 2
+      image.layoutParams.width = image.layoutParams.width / 2
+      lightBar.setVisible()
+      humidityBar.setVisible()
+      temperatureBar.setVisible()
+    }
 
 
   private fun initCharts() {
@@ -136,16 +136,18 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
             temperatureText.text = "${it.temperature} Cº"
             humidityText.text = "${it.humidity} %"
             lightBar
-                .startAnimation(ProgressAnimation(lightBar, 0F, (it.sunLight / 10).toFloat())
-                    .apply { duration = 1000 })
+              .startAnimation(ProgressAnimation(lightBar, 0F, (it.sunLight / 10).toFloat())
+                .apply { duration = 1000 })
             humidityBar
-                .startAnimation(ProgressAnimation(humidityBar, 0F, it.humidity.toFloat())
-                    .apply { duration = 500 })
+              .startAnimation(ProgressAnimation(humidityBar, 0F, it.humidity.toFloat())
+                .apply { duration = 500 })
             temperatureBar
-                .startAnimation(ProgressAnimation(temperatureBar,
-                    0F,
-                    (it.temperature * 2).toFloat())
-                    .apply { duration = 700 })
+              .startAnimation(ProgressAnimation(
+                temperatureBar,
+                0F,
+                (it.temperature * 2).toFloat()
+              )
+                .apply { duration = 700 })
 
           })
         }
@@ -163,32 +165,32 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
   }
 
   override fun onBackPressed() {
-
-    lightBar.startAnimation(ProgressAnimation(lightBar, lightBar.progress.toFloat(), 0F).apply {
-      duration = 1000
+    val pvhX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.5F, 1F)
+    val pvhY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.5F, 1F)
+    val scaleAnimation = ObjectAnimator.ofPropertyValuesHolder(image, pvhX, pvhY)
+    val setAnimation = AnimatorSet()
+    setAnimation.apply {
+      play(scaleAnimation)
       onFinish {
-        val pvhX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0.5F, 1F)
-        val pvhY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0.5F, 1F)
-        val scaleAnimation = ObjectAnimator.ofPropertyValuesHolder(image, pvhX, pvhY)
-        val setAnimation = AnimatorSet()
-        setAnimation.apply {
-          play(scaleAnimation)
-          onFinish {
-            lightBar.visibility = INVISIBLE
-            humidityBar.visibility = INVISIBLE
-            temperatureBar.visibility = INVISIBLE
-            Handler().postDelayed({
-              super.onBackPressed()
-            }, 300)
-          }
-          start()
-        }
-
+        lightBar.progressDrawable = ContextCompat
+          .getDrawable(applicationContext, android.R.color.transparent)
+        lightBar.visibility = GONE
+        humidityBar.progressDrawable = ContextCompat
+          .getDrawable(applicationContext, android.R.color.transparent)
+        humidityBar.visibility = GONE
+        temperatureBar.progressDrawable = ContextCompat
+          .getDrawable(applicationContext, android.R.color.transparent)
+        temperatureBar.visibility = GONE
+        plantName.visibility = GONE
+        Handler().postDelayed({
+          super.onBackPressed()
+        }, 100)
       }
-    })
-    humidityBar.startAnimation(ProgressAnimation(humidityBar, humidityBar.progress.toFloat(), 0F).apply { duration = 500 })
-    temperatureBar.startAnimation(ProgressAnimation(temperatureBar, temperatureBar.progress.toFloat(), 0F).apply { duration = 700 })
+      start()
+    }
+
   }
+
 
   override fun onSaveInstanceState(outState: Bundle?) {
     outState?.run {

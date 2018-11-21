@@ -34,10 +34,10 @@ class PlantsAdapter(var trigger: (TextView, androidx.cardview.widget.CardView, I
       }
       with(item) {
         plantImage.setCircleBackgroundColorResource(android.R.color.holo_blue_light)
-        plantImage.setImageResource(R.drawable.flower)
+        plantImage.setImageResource(R.drawable.hierbabuena)
         plantTemperature.text = "${plant.temperature.toInt()} C"
         plantTemperatureBar.progress = plant.temperature.toInt()
-        plantSun.text = "${plant.sunLight.toInt()} %"
+        plantSun.text = "${plant.sunLight.toInt()} lux"
         plantSunBar.progress = plant.sunLight.toInt()
         plantName.text = plant.name
       }

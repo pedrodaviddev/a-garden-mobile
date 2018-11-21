@@ -17,11 +17,11 @@ class PlantConfigurationViewModel(
   val plant: MutableLiveData<Plant> = MutableLiveData()
 
   init {
-    Executor.execute(GetPlant(plantsRepository, this, plantId))
+    Executor execute GetPlant(plantsRepository, this, plantId)
   }
 
   fun updatePlantConfiguration() {
-    Executor.execute(UpdateConfigurationOfPlant(plantsRepository, plant.value!!))
+    Executor execute UpdateConfigurationOfPlant(plantsRepository, plant.value!!)
   }
 
   override fun onLoad(any: Plant) {
