@@ -5,8 +5,11 @@ import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.os.Bundle
 import android.os.Handler
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -15,7 +18,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -47,10 +49,21 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
     restoreStateOfViewsIfActivityRecreation(savedInstanceState)
     initRefreshLayout()
     initCharts()
-    image.onClick {
-      startActivity<PlantConfigurationActivity>("plantId" to plantId)
-    }
   }
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.plant_details, menu)
+    return true
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item!!.itemId) {
+    R.id.openIrrigateMenu -> {
+      startActivity<PlantConfigurationActivity>("plantId" to plantId)
+      true
+    }
+    else -> super.onOptionsItemSelected(item)
+  }
+
 
   private fun initRefreshLayout() {
     refreshLayout.setOnRefreshListener(this)
@@ -102,7 +115,7 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
     }
     humidityStat.axisLeft.axisMaximum = 100F
     humidityStat.data = LineData(humidityDataSet)
-    humidityStat.highlightValue(3F,3,false)
+    humidityStat.highlightValue(3F, 3, false)
     humidityStat.invalidate()
 
 
@@ -136,9 +149,9 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
       setAnimation.apply {
         onFinish {
           viewModel.plant.observe(this@PlantDetailActivity, Observer {
-            lightText.text = "${it.sunLight} lux"
-            temperatureText.text = "${it.temperature} Cº"
-            humidityText.text = "${it.humidity} %"
+            lightText.text = "${it.sunLight.toInt()} lux"
+            temperatureText.text = "${it.temperature.toInt()} Cº"
+            humidityText.text = "${it.humidity.toInt()} %"
             lightBar
               .startAnimation(ProgressAnimation(lightBar, 0F, (it.sunLight / 10).toFloat())
                 .apply { duration = 1000 })
