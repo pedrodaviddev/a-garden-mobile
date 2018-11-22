@@ -19,39 +19,45 @@ import com.pedrodavidmcr.agarden.base.Injector
 import com.pedrodavidmcr.agarden.plants.domain.Plant
 import com.pedrodavidmcr.agarden.plants.view.activity.PlantDetailActivity
 import com.pedrodavidmcr.agarden.plants.view.adapter.PlantsAdapter
-import com.pedrodavidmcr.agarden.plants.viewmodel.PlantListViewModel
+import com.pedrodavidmcr.agarden.plants.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_plants.*
 import kotlinx.android.synthetic.main.items_plants.*
 import org.jetbrains.anko.intentFor
 
 class PlantsFragment : Fragment() {
-  private lateinit var viewModel: PlantListViewModel
+  private val viewModel: MainViewModel by lazy {
+    val factory = Injector.providePlantListViewModelFactory()
+    activity?.run {
+      ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
+    }!!
+  }
   private val onElementClickListener: (TextView, CardView, ImageView, Plant) -> Unit by lazy {
     { text: TextView, card: CardView, image: ImageView, plant: Plant ->
       val arrayOfTransitionNames = arrayOf<Pair<View, String>>(
-          Pair.create(card, ViewCompat.getTransitionName(card)),
-          Pair.create(image, ViewCompat.getTransitionName(image)),
-          Pair.create(text, ViewCompat.getTransitionName(text)))
+        Pair.create(card, ViewCompat.getTransitionName(card)),
+        Pair.create(image, ViewCompat.getTransitionName(image)),
+        Pair.create(text, ViewCompat.getTransitionName(text))
+      )
       val bundle: Bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
-          activity!!, *arrayOfTransitionNames)
-          .toBundle()!!
+        activity!!, *arrayOfTransitionNames
+      )
+        .toBundle()!!
 
       val intent = activity!!.intentFor<PlantDetailActivity>(
-          "transitionRoot" to ViewCompat.getTransitionName(card),
-          "transitionImage" to ViewCompat.getTransitionName(image),
-          "transitionName" to ViewCompat.getTransitionName(plantName),
-          "plantId" to plant.id
+        "transitionRoot" to ViewCompat.getTransitionName(card),
+        "transitionImage" to ViewCompat.getTransitionName(image),
+        "transitionName" to ViewCompat.getTransitionName(plantName),
+        "plantId" to plant.id
       )
       startActivity(intent, bundle)
     }
   }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                            savedInstanceState: Bundle?): View? {
-    val factory = Injector.providePlantListViewModelFactory()
-    viewModel = ViewModelProviders.of(this, factory).get(PlantListViewModel::class.java)
-    return inflater.inflate(R.layout.fragment_plants, container, false)
-  }
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? = inflater.inflate(R.layout.fragment_plants, container, false)
+
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) = initPlantList()
 

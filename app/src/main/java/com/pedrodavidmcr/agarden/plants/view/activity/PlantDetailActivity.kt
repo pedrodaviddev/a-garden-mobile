@@ -39,7 +39,7 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_plant_detail)
-
+    title = "Detalle de planta"
     val factory = Injector.providePlantDetailViewModelFactory(plantId)
     viewModel = ViewModelProviders.of(this, factory).get(PlantDetailViewModel::class.java)
 
@@ -184,7 +184,7 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
         plantName.visibility = GONE
         Handler().postDelayed({
           super.onBackPressed()
-        }, 100)
+        }, 10)
       }
       start()
     }

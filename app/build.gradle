@@ -38,6 +38,7 @@ dependencies {
     implementation "org.jetbrains.anko:anko:$anko_version"
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation 'com.github.hotchemi:khronos:0.9.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
