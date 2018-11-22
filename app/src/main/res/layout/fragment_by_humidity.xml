@@ -15,7 +15,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="With this option, the irrigation will happen every hour to mantain the humidity on the selected plant"
+        android:text="Con este modo, la planta será regada cada hora si no tiene la humedad indicada"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

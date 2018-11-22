@@ -12,9 +12,8 @@ import khronos.toString
 import kotlinx.android.synthetic.main.items_irrigation.view.*
 import java.util.*
 
-class IrrigationAdapter(var plantList: List<Plant>) :
-  RecyclerView.Adapter<IrrigationAdapter.IrrigationHolder>() {
-  var data: List<Pair<Irrigation,Plant>> = emptyList()
+class IrrigationAdapter : RecyclerView.Adapter<IrrigationAdapter.IrrigationHolder>() {
+  var data: List<Pair<Irrigation, Plant>> = emptyList()
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IrrigationHolder =
     IrrigationHolder(
       LayoutInflater.from(parent.context).inflate(
@@ -32,13 +31,17 @@ class IrrigationAdapter(var plantList: List<Plant>) :
 
   inner class IrrigationHolder(private val item: View) : ViewHolder(item) {
     fun setData(irrigation: Pair<Irrigation, Plant>) {
-      item.irrigationText.text = "Se ha efectuado el riego de la maceta con" +
-          " ${irrigation.second.name} a las ${
-          Calendar.getInstance().also {
-            it.timeInMillis = irrigation.first.date
-          }.time.toString("HH:mm dd/MM")
-          }"
+      item.irrigationText.text =
+          item.context.getString(
+            R.string.irrigation_message, irrigation.second.name,
+            getDateFromMillisFormatted(irrigation)
+          )
+    }
 
+    private fun getDateFromMillisFormatted(irrigation: Pair<Irrigation, Plant>): String {
+      return Calendar.getInstance().also {
+        it.timeInMillis = irrigation.first.date
+      }.time.toString("HH:mm dd/MM")
     }
   }
 }

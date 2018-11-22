@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.pedrodavidmcr.agarden.R
 import com.pedrodavidmcr.agarden.base.Injector
+import com.pedrodavidmcr.agarden.base.view.extension.color
 import com.pedrodavidmcr.agarden.plants.Humidity
 import com.pedrodavidmcr.agarden.plants.domain.Configuration
 import com.pedrodavidmcr.agarden.plants.domain.Plant
@@ -18,6 +19,7 @@ import org.jetbrains.anko.childrenSequence
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.textAppearance
+import org.jetbrains.anko.textColor
 
 class PlantConfigurationActivity : AppCompatActivity() {
   private lateinit var viewModel: PlantConfigurationViewModel
@@ -27,6 +29,7 @@ class PlantConfigurationActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_plant_configuration)
+    title = "Configuración de riego"
 
     val factory = Injector.providePlantConfigurationViewModelFactory(plantId)
     viewModel = ViewModelProviders.of(this, factory)
@@ -88,11 +91,11 @@ class PlantConfigurationActivity : AppCompatActivity() {
         .inflate(R.layout.tab_settings, null).childrenSequence().filter { it is TextView }
         .first().apply {
           (this as TextView).apply {
-            text = "Scheduled"
+            text = context.getString(R.string.scheduled)
             textAppearance = android.R.style.TextAppearance_Material_Widget_TabWidget
             textSize = 11F
             compoundDrawablePadding = dip(5)
-
+            textColor = color(android.R.color.white)
             setCompoundDrawablesWithIntrinsicBounds(R.drawable.clock, 0, 0, 0)
           }
         }
@@ -100,8 +103,9 @@ class PlantConfigurationActivity : AppCompatActivity() {
         .inflate(R.layout.tab_settings, null).childrenSequence().filter { it is TextView }
         .first().apply {
           (this as TextView).apply {
-            text = "Mantain humidity"
+            text = context.getString(R.string.mantain_humidity)
             textAppearance = android.R.style.TextAppearance_Material_Widget_TabWidget
+            textColor = color(android.R.color.white)
             textSize = 11F
             compoundDrawablePadding = dip(5)
             setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.humidity, 0, 0, 0)

@@ -3,7 +3,18 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_plants">Plants</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="update">Actualizar</string>
+    <string name="irrigation_program">Programa de riego</string>
+    <string name="required_humidity">Humedad requerida</string>
+    <string name="mantain_humidity">Mantener humedad</string>
+    <string name="scheduled">Programado</string>
+    <string name="scheduled_explanation">
+        Con este modo, la planta será regada en los momentos seleccionados
+    </string>
+    <string name="on_sunrise">Al amanecer</string>
+    <string name="after_sunset">Tras la puesta del sol</string>
+    <string name="irrigation_message">
+        Se ha efectuado el riego de la maceta con %1$s a las %2$s
+    </string>
 </resources>

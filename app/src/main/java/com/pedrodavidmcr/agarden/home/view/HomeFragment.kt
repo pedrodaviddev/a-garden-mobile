@@ -15,7 +15,7 @@ import com.pedrodavidmcr.agarden.plants.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
-  private val adapter: IrrigationAdapter = IrrigationAdapter(emptyList())
+  private val adapter: IrrigationAdapter = IrrigationAdapter()
 
   private val viewModel: MainViewModel by lazy {
     val factory = Injector.providePlantListViewModelFactory()

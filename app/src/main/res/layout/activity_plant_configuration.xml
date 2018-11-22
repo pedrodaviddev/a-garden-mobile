@@ -9,48 +9,46 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="When to irrigate"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/accentGray"
+        android:gravity="center"
+        android:text="@string/irrigation_program"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/humiditySelector"
-        tools:layout_editor_absoluteX="16dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/cardView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/humiditySelector"/>
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="How much irrigate"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"/>
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Configure the irrigation"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/accentGray"
+        android:gravity="center"
+        android:text="@string/required_humidity"
         android:textSize="18sp"
-        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/humiditySelector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"/>
 
     <com.pedrodavidmcr.agarden.base.view.custom.PresetRadioGroup
         android:id="@+id/humiditySelector"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_margin="3dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:orientation="horizontal"
         android:weightSum="4"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
@@ -62,8 +60,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:presetButtonUnitText="Humidity"
-            app:presetButtonValueText="LOW"/>
+            app:presetButtonUnitText="de humedad"
+            app:presetButtonValueText="60%"/>
 
         <com.pedrodavidmcr.agarden.base.view.custom.PresetValueButton
             android:id="@+id/mediumHumidity"
@@ -71,8 +69,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:presetButtonUnitText="Humidity"
-            app:presetButtonValueText="MEDIUM"/>
+            app:presetButtonUnitText="de humedad"
+            app:presetButtonValueText="70%"/>
 
         <com.pedrodavidmcr.agarden.base.view.custom.PresetValueButton
             android:id="@+id/highHumidity"
@@ -80,8 +78,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:presetButtonUnitText="Humidity"
-            app:presetButtonValueText="HIGH"/>
+            app:presetButtonUnitText="de humedad"
+            app:presetButtonValueText="80%"/>
 
         <com.pedrodavidmcr.agarden.base.view.custom.PresetValueButton
             android:id="@+id/maxHumidity"
@@ -89,8 +87,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:presetButtonUnitText="Humidity"
-            app:presetButtonValueText="VERY HIGH"/>
+            app:presetButtonUnitText="de humedad"
+            app:presetButtonValueText="90%"/>
 
     </com.pedrodavidmcr.agarden.base.view.custom.PresetRadioGroup>
 
@@ -98,13 +96,10 @@
         android:id="@+id/cardView3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toTopOf="@+id/updateButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
@@ -116,13 +111,14 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
-                android:background="@android:color/darker_gray"
+                android:background="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tabGravity="fill"
-                app:tabMode="fixed"/>
+                app:tabMode="fixed"
+                app:tabTextColor="@android:color/white"/>
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/configuration"
@@ -140,14 +136,15 @@
 
     <Button
         android:id="@+id/updateButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Update"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView3"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,4 @@ class ByHumidityFragment : androidx.fragment.app.Fragment() {
                             savedInstanceState: Bundle?)
       : View? = inflater.inflate(R.layout.fragment_by_humidity, container, false)
 
-
-
 }
