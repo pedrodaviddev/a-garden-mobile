@@ -85,11 +85,11 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
     chart.setBackgroundColor(color(android.R.color.white))
     chart.legend.setCustom(emptyArray())
     chart.axisLeft.axisMinimum = 0F
-    chart.xAxis.setDrawGridLines(false)
+    chart.xAxis.isEnabled = false
     chart.axisLeft.setDrawGridLines(false)
-    chart.axisRight.setDrawGridLines(false)
-    chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+    chart.axisRight.isEnabled = false
     chart.description = Description().also { it.text = "" }
+    chart.setTouchEnabled(false)
   }
 
   private fun populateHumidityChart(humidityList: List<Double>) {
@@ -102,6 +102,9 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
     }
     humidityStat.axisLeft.axisMaximum = 100F
     humidityStat.data = LineData(humidityDataSet)
+    humidityStat.highlightValue(3F,3,false)
+    humidityStat.invalidate()
+
 
   }
 
@@ -116,6 +119,7 @@ class PlantDetailActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshLis
 
     temperatureStat.axisLeft.axisMaximum = 45F
     temperatureStat.data = LineData(temperatureDataSet)
+    temperatureStat.invalidate()
   }
 
   private fun animateActivityEntry() {
